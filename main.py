@@ -24,6 +24,10 @@ def index():
         return render_template("index.html")
 
 
+def lower(param):
+    pass
+
+
 @app.route("/transcribe", methods=['POST', 'GET'])
 def transcribe():
     transcript = ""
@@ -42,8 +46,7 @@ def transcribe():
             with audioFile as source:
                 data = recognizer.record(source)
             transcript = recognizer.recognize_google(data, key=None)
-
-        return render_template('transcribe.html', transcript=transcript)
+        return render_template('transcribe.html', transcript=transcript.lower())
 
     else:
         return render_template('transcribe.html')
